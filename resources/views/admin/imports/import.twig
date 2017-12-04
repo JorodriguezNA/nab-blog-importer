@@ -1,0 +1,87 @@
+{% extends "theme::layouts/default" %}
+{% block content %}
+	{{ asset_add('styles.css', 'nabmarketingteam.module.blogimporter::css/styles.css') }}
+	{{ asset_add('blogimporter.js', 'nabmarketingteam.module.blogimporter::js/blogimporter.js') }}
+	<div id="dashboard">
+        <div class="container-fluid">
+        	<div class="row">
+        		<div class="col-sm-24">
+		        	<div class="pull-right text-right" style="padding-top: 20px; padding-bottom: 20px;">
+			        	<nobr>
+			        		<div class="btn btn-sm btn-warning import-all">
+			        			<i class="fa fa-cloud-download" aria-hidden="true"></i>
+								Import All
+			        		</div>
+			        	</nobr>
+		        	</div>
+        		</div>
+        	</div>
+			<div class="card">
+				<table id="blog-table" class=" table-condensed table">
+					<thead>
+						<tr>
+							<th>
+							</th>
+							<th>
+								Blog Title
+							</th>
+							<th>
+								Author
+							</th>
+							<th>
+								Status
+							</th>
+							<th>
+								Action
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for blogpost in blog_info %}
+							<tr data-importerid="{{ importer_id }}" data-postid="{{ blogpost.id }}" {% if blogpost.isimported == true %}data-isimported="true"{% else %} data-isimported="false" {% endif %}>
+								<td>
+									<img src="{{ blogpost.featured_image }}" class="table-image" style="max-width: 80px;">
+								</td>
+								<td>
+									<a href="{{ blogpost.absolute_url }}" target="_blank">{{ blogpost.title }}</a>
+								</td>
+								<td data-authoremail="{{ blogpost.blog_author.email }}" {% if blogpost.importAuthor == true %}class="text-danger author-cell"{% else %}class="author-cell"{% endif %}>
+
+									{{ blogpost.blog_author.display_name }}
+								</td>
+								<td class="imported-cell" style="text-align: center; font-size: 25px;">
+									{% if blogpost.isimported == false %}
+										<i class="fa fa-times-circle-o fa-2 text-muted" aria-hidden="true" title="Not Imported"></i>
+									{% else %}
+										<i class="fa fa-check-circle-o fa-2 text-success" aria-hidden="true" title="Imported"></i>
+									{% endif %}
+								</td>
+								<td>
+									<nobr>
+										<a href="{{ blogpost.absolute_url }}" target="_blank"><div class="btn btn-sm btn-success">
+											<i class="fa fa-search" aria-hidden="true"></i>
+											VIEW
+										</div></a>
+										{% if blogpost.importAuthor == true %}
+											<div class="btn btn-sm btn-warning import-author">
+												<i class="fa fa-cloud-download" aria-hidden="true"></i>
+												Import Author
+											</div>
+										{% else %}
+											<div class="btn btn-sm btn-warning import-this">
+												<i class="fa fa-cloud-download" aria-hidden="true"></i>
+												Import
+											</div>
+										{% endif %}
+									</nobr>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	{{ asset_script('blogimporter.js') }}
+{% endblock %} 
