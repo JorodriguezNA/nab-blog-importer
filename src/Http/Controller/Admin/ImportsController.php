@@ -213,9 +213,6 @@ class ImportsController extends AdminController
         $repository = new EntryRepository();
 
         $repository->setModel(new PostsDefaultPostsEntryModel());
-        //$posts->truncate();
-        //$repository->truncate();
-        //$postContent->truncate();
 
         $postcontent =  (new PostsDefaultPostsEntryModel())->create(
             [
@@ -247,7 +244,7 @@ class ImportsController extends AdminController
             ]
         );
 
-        //$repository = new EntryRepository();
+       
 
         
 
@@ -312,5 +309,17 @@ class ImportsController extends AdminController
             return json_encode($isauthor);
         }
         
+    }
+
+    public function truncate(PostRepositoryInterface $posts, PostsDefaultPostsEntryModel $postContent)
+    {
+        $repository = new EntryRepository();
+
+        $repository->setModel(new PostsDefaultPostsEntryModel());
+        $posts->truncate();
+        $repository->truncate();
+        $postContent->truncate();
+
+        return json_encode(array('success' => true));
     }
 }

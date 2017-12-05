@@ -54,6 +54,7 @@ class BlogimporterModuleServiceProvider extends AddonServiceProvider
         'admin/blogimporter/imports/run/{id}'   => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportsController@import',
         'admin/blogimporter/imports/importpost/{siteid}/{postid}' => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportsController@importpost',
         'admin/blogimporter/imports/importauthor/{siteid}/{authoremail}' => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportsController@createauthor',
+        'admin/blogimporter/imports/truncateposts' => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportsController@truncate',
         'admin/blogimporter'           => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportersController@index',
         'admin/blogimporter/create'    => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportersController@create',
         'admin/blogimporter/edit/{id}' => 'Nabmarketingteam\BlogimporterModule\Http\Controller\Admin\ImportersController@edit',

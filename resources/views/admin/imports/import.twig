@@ -12,6 +12,10 @@
 			        			<i class="fa fa-cloud-download" aria-hidden="true"></i>
 								Import All
 			        		</div>
+			        		<div class="btn btn-sm btn-danger truncate-all">
+			        			<i class="fa fa-trash" aria-hidden="true"></i>
+								Clear All
+			        		</div>
 			        	</nobr>
 		        	</div>
         		</div>
@@ -67,6 +71,11 @@
 											<div class="btn btn-sm btn-warning import-author">
 												<i class="fa fa-cloud-download" aria-hidden="true"></i>
 												Import Author
+											</div>
+										{% elseif blogpost.isimported == true %}
+											<div class="btn btn-sm btn-warning import-this disabled" disabled="disabled">
+												<i class="fa fa-check" aria-hidden="true"></i>
+												Imported
 											</div>
 										{% else %}
 											<div class="btn btn-sm btn-warning import-this">
