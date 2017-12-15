@@ -222,6 +222,7 @@ class ImportsController extends AdminController
                     
                 ],
                 'featured_image_id' => $file->id,
+                'preview_snippet'   => strip_tags($blogPost->post_summary),
             ]
 
         );

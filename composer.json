@@ -1,6 +1,13 @@
 {
     "name": "nabmarketingteam/blogimporter-module",
     "type": "streams-addon",
+    "description": "A module for managing hubspot to pyro blog imports.",
+    "authors": [
+        {
+            "name": "Jordan Rodriguez",
+            "email": "jordanmrodriguez@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Nabmarketingteam\\BlogimporterModule\\": "src/"
