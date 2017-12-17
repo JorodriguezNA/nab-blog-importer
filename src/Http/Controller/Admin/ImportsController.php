@@ -125,7 +125,7 @@ class ImportsController extends AdminController
         {
             $authoremail = $author->email;
         }else{
-        $authoremail = 'none ' . $slug;
+        $authoremail = $siteinfo->default_author;
         }
         $isauthor = $users->findByEmail($authoremail);
         if($isauthor == null)
