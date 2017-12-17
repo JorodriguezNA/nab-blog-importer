@@ -23,6 +23,8 @@ class NabmarketingteamModuleBlogimporterCreateBlogimporterFields extends Migrati
                 'mode'  => 'dropdown',
             ],
         ],
+        'default_author' => 'anomaly.field_type.text',
+        
         'slug'      => [
             'type' => 'anomaly.field_type.slug',
             'config' => [

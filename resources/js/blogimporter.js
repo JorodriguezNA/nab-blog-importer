@@ -104,8 +104,8 @@ function importPost(elem, callback){
 	var thisElem = elem;
 	if($(elem).parents('tr').find('td.author-cell').hasClass('text-danger'))
 	{
-		var author = false;
-		var newauthor = createAuthor($(elem).parents('tr').find('td.author-cell').data('authoremail'), importerID);
+		var author = true;
+		//var newauthor = createAuthor($(elem).parents('tr').find('td.author-cell').data('authoremail'), importerID);
 
 	}else
 	{

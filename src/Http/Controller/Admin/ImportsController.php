@@ -106,7 +106,8 @@ class ImportsController extends AdminController
                 $blogPost->isimported = true;
             }
         }
-        return $this->view->make('module::admin/imports/import', ['blog_info' => $bloginfo, 'importer_id' => $id]);
+        //return json_encode($siteinfo);
+        return $this->view->make('module::admin/imports/import', ['blog_info' => $bloginfo, 'importer_id' => $id, 'author' => $siteinfo]);
     }
 
 
@@ -129,7 +130,10 @@ class ImportsController extends AdminController
         $isauthor = $users->findByEmail($authoremail);
         if($isauthor == null)
         {
+            $isauthor = $users->findByEmail($siteinfo->default_author);
             $blogPost->importAuthor = true;
+        }else{
+            $author = $blogPost->blog_post_author;
         }
 
         $tagnames = '';
@@ -146,7 +150,8 @@ class ImportsController extends AdminController
         $slug = str_replace("blog/", "", $blogPost->slug);
         $folder = $folders->findBySlug('s3_storage');
         $ispost = $posts->findBySlug($slug);
-        $author = $blogPost->blog_post_author;
+
+        
         $repository = new EntryRepository();
         $repository->setModel(new PostsDefaultPostsEntryModel());
         //$repository->truncate();
@@ -154,16 +159,11 @@ class ImportsController extends AdminController
         $category = $categories->findBySlug('news');
         $featured_image_path = pathinfo($blogPost->featured_image);
         $featureImageName = $featured_image_path['filename'];
-        //echo $featured_image_path['basename'];
-        //echo dirname(__FILE__);
         $pathRedirect = '../../../../';
-        //echo $featured_image_path['basename'] .' '. $folder . '<br /><br />';
-        //echo json_encode($files->findByNameAndFolder($featured_image_path['basename'], $folder));
-        //exit;
-        copy($blogPost->featured_image, dirname(__FILE__, 5).'/resources/seeder_gallery/'. $featured_image_path['basename']);
-        //echo json_encode($files->findByNameAndFolder($featured_image_path['basename'], $folder));
-        
-        //GetFileInfo
+        if($blogPost->featured_image != "")
+        {
+            copy($blogPost->featured_image, dirname(__FILE__, 5).'/resources/seeder_gallery/'. $featured_image_path['basename']);
+        }
         $curlFile = curl_init($blogPost->featured_image);
         curl_setopt($curlFile, CURLOPT_NOBODY, true);
         curl_setopt($curlFile, CURLOPT_RETURNTRANSFER, true);
@@ -174,10 +174,7 @@ class ImportsController extends AdminController
         curl_close($curlFile);
 
         if (preg_match('/Content-Length: (\d+)/', $filedata, $matches)) {
-
-            // Contains file size in bytes
             $contentLength = (int)$matches[1];
-
         }
 
         $featureImageContentType = exif_imagetype($blogPost->featured_image);

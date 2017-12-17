@@ -41,10 +41,15 @@ class NabmarketingteamModuleBlogimporterCreateImportersStream extends Migration
             'translatable' => true,
             'required' => true,
         ],
+        'default_author' => [
+            'translatable' => true,
+            'required' => true,
+        ],
         'slug' => [
             'unique' => true,
             'required' => true,
         ],
+
     ];
 
 }

@@ -72,7 +72,8 @@
 												<i class="fa fa-cloud-download" aria-hidden="true"></i>
 												Import Author
 											</div>
-										{% elseif blogpost.isimported == true %}
+										{% endif %}
+										{% if blogpost.isimported == true %}
 											<div class="btn btn-sm btn-warning import-this disabled" disabled="disabled">
 												<i class="fa fa-check" aria-hidden="true"></i>
 												Imported
